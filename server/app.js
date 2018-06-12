@@ -1,17 +1,13 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const demo = require('./express_demo')
 const douban = require('./douban')
 
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use('/static', express.static('static'));
-/**
- * 全局设置
- */
-app.all('*', function (req, res, next) {
-    res.setHeader('Content-Type', 'application/json;charset=utf-8');
-    next();
-});
 
 app.use('/demo', demo);
 

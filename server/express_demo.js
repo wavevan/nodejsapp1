@@ -14,13 +14,14 @@ router.get('/index', function (req, res) {
     res.sendFile(path.join(__dirname, '../') + '/' + 'index.html');
 });
 
-router.get('/process_get', function (req, res) {
+router.post('/process_get', function (req, res) {
     var response = {
-        'firstName': req.query.first_name,
-        'lastName': req.query.last_name
+        //get请求使用req.query.xxx取参数，post要添加body-parser组件
+        'firstName': req.body.first_name,
+        'lastName': req.body.last_name
     }
     console.log(response);
-    res.end(JSON.stringify(response));
+    res.send(JSON.stringify(response));
 });
 
 router.get('/getSysUser', function (req, res) {
@@ -51,7 +52,7 @@ router.post('/file_upload', upload.array('image'), function (req, res) {
                 };
             }
             console.log(response);
-            res.end(JSON.stringify(response));
+            res.send(JSON.stringify(response));
         });
     });
 })
