@@ -1,12 +1,11 @@
 const express = require('express')
 const query = require('./mysql_demo')
 const path = require('path')
-var fs = require("fs")
-var multer = require('multer')
-
+const fs = require("fs")
+const multer = require('multer')
+const upload = multer({ dest: '/tmp/' })
 const router = express.Router();
 
-router.use(multer({ dest: '/tmp/' }).array('image'));
 router.get('/', function (req, res) {
     res.send('Hello World!');
 });
@@ -36,7 +35,7 @@ router.get('/uploadPage', function (req, res) {
     res.sendFile(path.join(__dirname, '../') + '/' + 'upload.html');
 })
 
-router.post('/file_upload', function (req, res) {
+router.post('/file_upload', upload.array('image'), function (req, res) {
 
     console.log(req.files[0]);  // 上传的文件信息
 
