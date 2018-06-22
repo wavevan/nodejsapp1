@@ -15,7 +15,7 @@ router.get('/index', (req, res) => {
 });
 
 router.post('/process_get', (req, res) => {
-    var response = {
+    let response = {
         //get请求使用req.query.xxx取参数，post要添加body-parser组件
         'firstName': req.body.first_name,
         'lastName': req.body.last_name
@@ -25,8 +25,8 @@ router.post('/process_get', (req, res) => {
 });
 
 router.get('/getSysUser', (req, res) => {
-    var sysUserId = req.query.sysUserId;
-    var rs = query('select * from sys_user where sys_user_id = ?', sysUserId, (err, result, fields) => {
+    let sysUserId = req.query.sysUserId;
+    let rs = query('select * from sys_user where sys_user_id = ?', sysUserId, (err, result, fields) => {
         res.send(result);
     });
 
@@ -40,7 +40,7 @@ router.post('/file_upload', upload.array('image'), (req, res) => {
 
     console.log(req.files[0]);  // 上传的文件信息
 
-    var des_file = __dirname + "/" + req.files[0].originalname;
+    let des_file = __dirname + "/" + req.files[0].originalname;
     fs.readFile(req.files[0].path, (err, data) => {
         fs.writeFile(des_file, data, (err) => {
             if (err) {
