@@ -10,15 +10,15 @@ const dbConfig = {
 
 const pool = mysql.createPool(dbConfig);
 
-const query = function (sql, options, callback) {
-    pool.getConnection(function (err, conn) {
+const query = (sql, options, callback) => {
+    pool.getConnection((err, conn) => {
         if (err) {
-            console.log('[get connection err] - ' + err.message);
+            console.log(`[get connection err] - ${err.message}`);
             callback(err, null, null);
         } else {
-            conn.query(sql, options, function (err, results, fields) {
+            conn.query(sql, options, (err, results, fields) => {
                 if(err){
-                    console.log('[excute sql err] - ' + err.message);
+                    console.log(`[excute sql err] - ${err.message}`);
                 }
                 conn.release();
                 callback(err, results, fields);

@@ -13,9 +13,8 @@ app.use('/demo', demo);
 
 app.use('/doubanApi', douban);
 
-var server = app.listen(8080, function () {
-    var host = server.address().address;
-    var port = server.address().port;
-
-    console.log('访问的地址为 http://%s:%s', host, port);
+let server = app.listen(8080, () => {
+    let host = server.address().address;
+    let port = server.address().port;
+    console.log(`访问的地址为 http://${host}${port}`);
 })
